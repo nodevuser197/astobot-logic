@@ -1,0 +1,12 @@
+  *.lck
+  _autosave-*
+  *-bak
+  *.bak
+  fp-info-cache
+  *-backups/
+  gerber/
+  GERBER/
+  fab/
+  fab.zip
+  *.rar
+  *.zip
