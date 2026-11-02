@@ -1,7 +1,8 @@
 # Devir Notu: Astobot Logic
 
-Tarih: 2026-11-01
+İlk sürüm: 2026-11-01 · Son güncelleme: 2026-11-02
 Repo: `nodevuser197/astobot-logic`, dal `ccr-b33e23c0-c4wffs`
+İlk sürüm PR #1 ile `master`'a merge edildi (merge commit `07e165b`).
 
 ## 1. Kapsam
 
@@ -14,7 +15,8 @@ Repo: `nodevuser197/astobot-logic`, dal `ccr-b33e23c0-c4wffs`
 | Çıktı | Konum | İçerik |
 | --- | --- | --- |
 | Araştırma yol haritası dokümanı | https://claude.ai/artifact/JPfrGVv9jTu8V66jFifvnz | Platform profili, v1 kısıtları, 8 astronomi konusu, 6 robotik/gömülü konu, 5 projelik kolektif 2209-A programı (şemalı), 2209-A form iskeleti |
-| Bu devir notu | `devir.md` | Oturum özeti, teknik referans, açık sorular |
+| Bu devir notu | `devir.md` | Oturum özeti, teknik referans, TÜBİTAK program eşleşmesi, açık sorular |
+| PR #1 | https://github.com/nodevuser197/astobot-logic/pull/1 | `devir.md` ilk sürümü, merge edildi |
 
 ## 3. Şematik hiyerarşisi
 
@@ -120,17 +122,54 @@ TPS565247 giriş üst sınırı 17 V. Bu sınır 4S LiPo'nun tam dolu gerilimine
 
 Ayrıntılar dokümanda.
 
-## 10. Açık sorular (dokümanda yorum olarak bırakıldı)
+## 10. TÜBİTAK program eşleşmesi
+
+Kart üretilip test edildiği için en doğrudan uyan program 2209-A değil, 2242'dir. 2209-A yapılacak araştırmayı fonlar; 2242 ise TEKNOFEST kapsamında düzenlenen ve tamamlanmış özgün projelerin yarıştığı bir programdır.
+
+| Program | Başvuran | Kartın rolü | Kısıt |
+| --- | --- | --- | --- |
+| 2242 Üniversite Öğrencileri Araştırma Proje Yarışmaları | Ön lisans/lisans; bireysel veya en fazla 3 kişilik takım; danışman isteğe bağlı | Mevcut kart ve test sonuçları doğrudan proje | Özgün olmalı; ticarileşmiş ürünle başvurulamaz; bir öğrenci tek başvuruda yer alabilir; yılda bir çağrı |
+| 2209-A | Lisans + akademik danışman | Ön çalışma; proje yeni araştırma | Dokümanda işlendi |
+| 2209-B | Lisans + akademik danışman + sanayi danışmanı | Firma problemine uyarlanmış kontrol kartı | Sanayi kuruluşu şartları; iki danışman aynı kişi olamaz; sanayi onay yazısı |
+| 1001 / 1002 / 3501 | Öğretim üyesi veya doktoralı yürütücü; öğrenci bursiyer | Deney altyapısı | Öğrenci yürütücü olamaz |
+| 1512 BiGG | Girişimci | Ürün prototipi (INDI uyumlu, CAN'lı kundak/gözlemevi kontrol kartı) | Aşamalı; başvuru tarihinde şirket ortaklığı olmamalı; Ar-Ge içeriği şart |
+
+Güncel çağrı koşulları ve tarihleri tubitak.gov.tr'den doğrulanmalı. Arama sonuçlarındaki en yeni resmî çağrı belgeleri 2022–2023 tarihli.
+
+Kaynaklar:
+- 2242: https://tubitak.gov.tr/en/node/14075 · https://tto.gumushane.edu.tr/media/uploads/tto/files/tubitak-2242-universite-ogrencileri-arastrma-proje-yarsmalar.pdf
+- 2209-B: https://tubitak.gov.tr/tr/burslar/lisans-onlisans/burs-programlari/2209-b-universite-ogrencileri-sanayiye-yonelik-arastirma-projeleri-destegi-programi
+- BiGG: https://tubitak.gov.tr/sites/default/files/2023-09/bigg_2023_yili_1._cagri_duyurusu_230324.pdf
+
+## 11. Ek konu önerileri (dokümanda yok)
+
+| # | Konu | Kartta kullanılanlar | Metrik | Program |
+| --- | --- | --- | --- | --- |
+| 1 | CubeSat reaksiyon tekerleği yönelim kontrolü test düzeneği | 3–4 motor + enkoder, J6'da IMU, CAN, Pi kamera | Yönelim hatası, oturma süresi, tekerlek doyması | 2209-A, 2242, 1001 |
+| 2 | Yıldız izleyici (star tracker) doğrulaması | Pi kamera + plate-solving, referans olarak enkoderli kundak | Kestirim ile enkoder açısı farkı (ark-saniye) | 2209-A, 2242 |
+| 3 | CAN hattında gömülü saldırı tespiti | CAN, Cortex-M4 (zamanlama analizi / TinyML), Pi saldırgan ve kayıt cihazı | Tespit oranı, yanlış alarm, gecikme, bellek | 2209-A, 1001, 2209-B |
+| 4 | Ağ gecikmeli teleoperasyon | MCU'da yerel kontrol, Pi üzerinden ağ; Smith öngörücü / dalga değişkenleri | Gecikmeye karşı takip hatası, kararlılık sınırı | 2209-A, 2242 |
+| 5 | Uzaktan erişimli kontrol laboratuvarı | Ters sarkaç / top-kiriş, Pi web arayüzü | Gecikme altında güvenli deney; eğitim araştırmasında öğrenme çıktısı (etik kurul gerekir) | 2209-A, 1001/1002 |
+| 6 | Sera içi bitki fenotipleme robotu | 4 motor + enkoder, Pi kamera, izole çıkışla valf | Konum tekrarlanabilirliği, görüntüden ölçüm hatası | 2209-B, 1001 |
+| 7 | Güneş radyo patlaması izleme | HI konumlandırıcısının Güneş takibine genişletilmesi | e-CALLISTO tipi ağ verisiyle karşılaştırma | 2209-A, 2242 |
+
+Konu seçerken bulgu 9 (J6'da SPI2/I2C2 ortak saat), bulgu 10 (pull-up yok) ve kartta akım ölçümünün olmaması dikkate alınmalı. Akım gerekiyorsa J4'teki sürücü kartından veya harici sensörden alınmalı.
+
+## 12. Açık sorular
+
+Dokümana yorum olarak bırakılan üç soru 2026-11-02'de yanıt yazılmadan "çözüldü" olarak kapatıldı. Yanıtlar kayıtlı değil:
 
 1. Ekip kaç öğrenciden oluşuyor? Kolektif program 5 başvuruya göre kurgulandı.
 2. Robotik bölümü dokümanda kalacak mı, yoksa doküman yalnızca astronomiye mi odaklanacak?
 3. Hazır bir teleskop kundağı var mı, yoksa mekanik sıfırdan mı yapılacak?
 
-## 11. Sonraki adımlar
+## 13. Sonraki adımlar
 
 - [ ] Açık soruları yanıtla, dokümanı güncelle
 - [ ] Bulgu 9 ve 10'u dokümanın "v1 kart kısıtları" tablosuna ekle (doküman şu an 7 kısıt listeliyor)
 - [ ] Güncel 2209-A çağrı metninden bütçe üst limitini ve danışman başına proje sınırını doğrula
+- [ ] 2242'nin bir sonraki çağrı takvimini ve proje rehberini kontrol et; mevcut kartla başvuru için kategori seç
+- [ ] Aynı çalışmanın hem 2209-A'da hem 2242'de kullanılabilirliğini iki çağrı metninden doğrula
 - [ ] Test kayıtlarını (ripple, e-sigorta limiti, enkoder, CAN/USB/UART) ön çalışma formatında topla
 - [ ] v2 revizyon listesini şematiğe işle (ayrı dalda)
 - [ ] Repo temizliği: `untitled*`, `.lck` ve `-bak` dosyaları, kökteki yinelenen Gerber'ler, `logic-backups/`
